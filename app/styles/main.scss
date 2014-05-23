@@ -45,3 +45,5 @@ body {
     @extend .col-md-9;
   }
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
