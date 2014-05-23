@@ -1,8 +1,15 @@
 /*jshint unused: vars */
-define(['angular', 'apps/header/HeaderApp', 'apps/default/DefaultApp', 'apps/demo/DemoApp', 'apps/masterdetail/MasterDetailApp']/*deps*/, function (angular)/*invoke*/ {
+define(['angular',
+    'apps/header/HeaderApp',
+    'apps/notification/NotificationApp',
+    'apps/default/DefaultApp',
+    'apps/demo/DemoApp',
+    'apps/masterdetail/MasterDetailApp'
+]/*deps*/, function (angular)/*invoke*/ {
     'use strict';
 
     angular.module('app', [
+        'NotificationApp',
         'HeaderApp',
         'DefaultApp',
         'MasterDetailApp',

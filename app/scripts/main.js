@@ -3,6 +3,8 @@ require.config({
     paths: {
         'sass-bootstrap': '../bower_components/sass-bootstrap/dist/js/bootstrap',
         jquery: '../bower_components/jquery/dist/jquery',
+        lodash: '../bower_components/lodash/dist/lodash',
+
         'angular-scenario': '../bower_components/angular-scenario/angular-scenario',
         'angular-sanitize': '../bower_components/angular-sanitize/angular-sanitize',
         'angular-route': '../bower_components/angular-route/angular-route',
@@ -46,7 +48,8 @@ require.config({
     },
     shim: {
         angular: {
-            exports: 'angular'
+            exports: 'angular',
+            deps: ['lodash']
         },
         'angular-route': [
             'angular'

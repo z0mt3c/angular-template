@@ -14,11 +14,16 @@ define(['angular'], function (angular) {
                     controller: 'DemoAppCtrl'
                 })
         })
-        .controller('DemoAppCtrl', function ($scope) {
+        .controller('DemoAppCtrl', ['$scope', 'Notifications', function ($scope, Notifications) {
+            $scope.notify = function($event, notification) {
+                $event.preventDefault();
+                var element = angular.element($event.currentTarget);
+                Notifications.add(element.attr('data-title'), element.attr('data-type'), element.attr('data-description'));
+            };
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',
                 'AngularJS',
                 'Karma'
             ];
-        });
+        }]);
 });

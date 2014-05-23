@@ -1,0 +1,12 @@
+<div class="notifications" ng-controller="NotificationsCtrl">
+    <ul class="notification-list">
+        <li class="notification-item animated fadeInRightBig fast {{notification.type}}" ng-repeat="(id, notification) in notifications">
+            <i class="fa fa-2x icon-{{notification.type}}"></i>
+
+            <div class="notification-body">
+                <h4 class="list-group-item-heading">{{notification.title}}</h4>
+                <p class="list-group-item-text">{{notification.description}}</p>
+            </div>
+        </li>
+    </ul>
+</div>
