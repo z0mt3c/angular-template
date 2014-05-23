@@ -1,0 +1,10 @@
+define(['angular'], function (angular) {
+    'use strict';
+    var defaultServices = angular.module('DefaultServices', ['ngResource']);
+
+    defaultServices.factory('Hello', ['$resource', function ($resource) {
+        return $resource('/api/hello/:name', {}, {
+            query: {method: 'GET', params: {name: '@name'}}
+        });
+    }]);
+});

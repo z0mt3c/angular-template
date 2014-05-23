@@ -16,7 +16,7 @@ define(['angular', 'apps/header/HeaderApp', 'apps/default/DefaultApp', 'apps/dem
 
     angular.module('app').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         //$locationProvider.html5Mode(true);
-        $routeProvider.otherwise({redirectTo:'/'});
+        $routeProvider.otherwise({redirectTo: '/'});
     }]);
 
     return angular.module('app');
