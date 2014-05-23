@@ -4,7 +4,7 @@ define(['angular'], function (angular) {
 
     defaultServices.factory('Hello', ['$resource', function ($resource) {
         return $resource('/api/hello/:name', {}, {
-            query: {method: 'GET', params: {name: '@name'}}
+            get: { method: 'GET', params: {name: '@name'}}
         });
     }]);
 });

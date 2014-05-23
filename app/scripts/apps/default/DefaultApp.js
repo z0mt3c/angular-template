@@ -20,7 +20,7 @@ define(['angular', 'angular-bootstrap-ui-transition', 'angular-bootstrap-ui-moda
                     controller: 'DefaultHelloCtrl',
                     resolve: {
                         hello: ['$route', 'Hello', function ($route, Hello) {
-                            return Hello.query({name: $route.current.params.name});
+                            return Hello.get({name: $route.current.params.name});
                         }]
                     }
                 })
