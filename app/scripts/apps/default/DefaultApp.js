@@ -27,7 +27,7 @@ define(['angular', 'angular-bootstrap-ui-transition', 'angular-bootstrap-ui-moda
                     }
                 });
         }])
-        .controller('DefaultStartCtrl', function ($scope, $modal) {
+        .controller('DefaultStartCtrl', ['$scope', '$modal', '$log', function ($scope, $modal, $log) {
             $scope.items = ['item1', 'item2', 'item3'];
 
             $scope.openModal = function ($event) {
@@ -50,7 +50,7 @@ define(['angular', 'angular-bootstrap-ui-transition', 'angular-bootstrap-ui-moda
                 });
 
             };
-        })
+        }])
         .controller('DefaultHelloCtrl', ['$scope', 'hello', function ($scope, hello) {
             $scope.say = hello;
         }])

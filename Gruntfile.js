@@ -156,15 +156,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // Automatically inject Bower components into the app
-        'bower-install': {
-            app: {
-                html: '<%= yeoman.app %>/index.html',
-                ignorePath: '<%= yeoman.app %>/'
-            }
-        },
-
-
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
             options: {
@@ -201,8 +192,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                        '<%= yeoman.dist %>/styles/fonts/*'
+                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                     ]
                 }
             }
@@ -309,6 +299,9 @@ module.exports = function (grunt) {
                             'views/{,*/}*.html',
                             'bower_components/**/*',
                             'images/{,*/}*.{webp}',
+                            'scripts/{,*/}{,*/}{,*/}*.html',
+                            'template/{,*/}{,*/}{,*/}*.html',
+                            'styles/fonts/*',
                             'fonts/*'
                         ]
                     },
@@ -402,27 +395,56 @@ module.exports = function (grunt) {
             }
         },
 
-        // r.js compile config
         requirejs: {
             dist: {
                 options: {
-                    dir: "<%= yeoman.dist %>/scripts/",
-                    modules: [
+                    almond: true,
+                    include: ['main'],
+                    baseUrl: '<%= yeoman.app %>/scripts',
+                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
+                    out: '<%= yeoman.dist %>/scripts/main.js',
+                    optimize: 'uglify2',
+                    generateSourceMaps: true,
+                    preserveLicenseComments: false,
+                    findNestedDependencies: true,
+                    replaceRequireScript: [
                         {
-                            name: 'main'
+                            files: ['<%= yeoman.dist %>/index.html'],
+                            module: 'main',
+                            modulePath: '/scripts/main'
                         }
-                    ],
+                    ]
+                }
+            }
+        },
+
+        // r.js compile config
+        /*
+        requirejs: {
+            dist: {
+                options: {
+                    dir: '<%= yeoman.dist %>/scripts/',
+                    name: 'main',
+                    include: ['main'],
                     preserveLicenseComments: false, // remove all comments
                     removeCombined: true,
                     baseUrl: '<%= yeoman.app %>/scripts',
                     mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
                     optimize: 'uglify2',
+                    wrap: true,
                     uglify2: {
                         mangle: false
-                    }
+                    },
+                    replaceRequireScript: [
+                        {
+                            files: ['<%= yeoman.dist %>/index.html'],
+                            module: 'main',
+                            modulePath: '/scripts/main'
+                        }
+                    ]
                 }
             }
-        },
+        },*/
 
 
         // express app
@@ -460,7 +482,6 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'bower-install',
             'concurrent:server',
             'autoprefixer',
             //'connect:livereload',
@@ -485,7 +506,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'bower-install',
         'bower:app',
         'replace:test',
         'useminPrepare',
