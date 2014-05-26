@@ -1,18 +1,9 @@
-<div class="md-layout">
-    <div class="md-side-region" ng-controller="MasterDetailListAppCtrl">
-        <h1>Manufacturer</h1>
-
-        <div class="md-side-list">
-            <a class="md-list-item" ng-repeat="menuItem in items" href="/#/masterdetail/{{menuItem.id}}" ng-class="{active: (menuItem.id == item.id)}">{{menuItem.title}} <span class="badge">{{menuItem.count}}</span></a>
-        </div>
-    </div>
-    <div class="md-main-region" ng-if="item">
-        <h1>{{item.title}}</h1>
-        <ul>
-            <li ng-repeat="device in item.devices">{{device}}</li>
-        </ul>
-    </div>
-    <div class="md-main-region" ng-if="!item">
-        <h1>No manufacturer selected</h1>
-    </div>
+<div ng-if="item">
+    <h1>{{item.title}}</h1>
+    <ul>
+        <li ng-repeat="device in item.devices">{{device}}</li>
+    </ul>
+</div>
+<div ng-if="!item">
+    <h1>No manufacturer selected</h1>
 </div>

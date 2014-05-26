@@ -63,6 +63,10 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true
                 }
+            },
+            nothing: {
+                files: ['.foobar'],
+                tasks: ['build', 'express:prod']
             }
         },
 
@@ -378,7 +382,7 @@ module.exports = function (grunt) {
             app: {
                 rjsConfig: '<%= yeoman.app %>/scripts/main.js',
                 options: {
-                    exclude: ['requirejs', 'json3', 'es5-shim']
+                    exclude: ['requirejs', 'json3', 'es5-shim', 'font-awesome', 'angular-ui-bootstrap']
                 }
             }
         },
@@ -499,6 +503,8 @@ module.exports = function (grunt) {
         'requirejs:dist',
         'htmlmin'
     ]);
+
+    grunt.registerTask('prod', [ 'build', 'express:prod', 'watch:nothing' ]);
 
     grunt.registerTask('default', [
         'newer:jshint',

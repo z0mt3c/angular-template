@@ -4,33 +4,52 @@ define(['angular', 'entities/masterdetail'], function (angular) {
     angular.module('MasterDetailApp', [
         'MasterDetailServices',
         /*angJSDeps*/
-        'ngCookies',
-        'ngResource',
-        'ngSanitize',
-        'ngRoute'])
-        .config(function ($routeProvider) {
-            $routeProvider
-                .when('/masterdetail/:id', {
-                    templateUrl: 'scripts/apps/masterdetail/templates/detail.tpl.html',
-                    controller: 'MasterDetailItemAppCtrl',
+        //'ngCookies',
+        //'ngResource',
+        //'ngSanitize',
+        'ui.router'])
+        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+            $stateProvider
+                .state({
+                    name: 'masterdetail',
+                    url: '/masterdetail',
+                    abstract: true,
+                    templateUrl: 'scripts/apps/masterdetail/templates/layout.tpl.html',
                     resolve: {
-                        item: ['$route', 'MasterDetail', function ($route, MasterDetail) {
-                            var id = $route.current.params.id;
-                            return id ? MasterDetail.get({id: id}) : null;
+                        items: ['MasterDetail', function (MasterDetail) {
+                            return MasterDetail.query();
                         }]
+                    },
+                    controller: 'MasterDetailListAppCtrl'
+                })
+                .state('masterdetail.empty', {
+                    url: '',
+                    views: {
+                        'detail': {
+                            templateUrl: 'scripts/apps/masterdetail/templates/empty.tpl.html'
+                        }
                     }
                 })
-                .when('/masterdetail', {
-                    templateUrl: 'scripts/apps/masterdetail/templates/detail.tpl.html',
-                    controller: 'MasterDetailEmptyAppCtrl'
-                })
-        })
+                .state('masterdetail.detail', {
+                    url: '/{id:[0-9]{1,4}}',
+                    views: {
+                        'detail': {
+                            templateUrl: 'scripts/apps/masterdetail/templates/detail.tpl.html',
+                            controller: 'MasterDetailItemAppCtrl',
+                            resolve: {
+                                item: ['$stateParams', 'MasterDetail', function ($stateParams, MasterDetail) {
+                                    return $stateParams.id ? MasterDetail.get({id: $stateParams.id}) : null;
+                                }]
+                            }
+                        }
+                    }
+                });
+        }])
         .controller('MasterDetailItemAppCtrl', ['$scope', 'item', function ($scope, item) {
             $scope.item = item;
         }])
-        .controller('MasterDetailEmptyAppCtrl', ['$scope', function ($scope) { }])
-        .controller('MasterDetailListAppCtrl', ['$scope', 'MasterDetail', function ($scope, MasterDetail) {
-            $scope.items = MasterDetail.query();
+        .controller('MasterDetailListAppCtrl', ['$scope', 'items', function ($scope, items) {
+            $scope.items = items;
         }]);
 });
 

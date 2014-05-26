@@ -1,17 +1,12 @@
 define(['angular'], function (angular) {
     'use strict';
 
-    return angular.module('NotificationApp', [
-        /*angJSDeps*/
-        'ngCookies',
-        'ngResource',
-        'ngSanitize',
-        'ngRoute'])
+    return angular.module('NotificationApp', [])
         .provider('Notifications', [function () {
             var options = {
                 ttl: 3000,
                 type: 'info'
-            }
+            };
 
             this.setOptions = function (newOptions) {
                 angular.extend(options, newOptions);

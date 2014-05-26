@@ -3,15 +3,14 @@ require.config({
     paths: {
         'sass-bootstrap': '../bower_components/sass-bootstrap/dist/js/bootstrap',
         jquery: '../bower_components/jquery/dist/jquery',
-        lodash: '../bower_components/lodash/dist/lodash',
-
+        lodash: '../bower_components/lodash/dist/lodash.compat',
         'angular-scenario': '../bower_components/angular-scenario/angular-scenario',
         'angular-sanitize': '../bower_components/angular-sanitize/angular-sanitize',
         'angular-route': '../bower_components/angular-route/angular-route',
         'angular-resource': '../bower_components/angular-resource/angular-resource',
         'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
         'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
-
+        'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
         'angular-bootstrap-ui-modal': '../bower_components/angular-ui-bootstrap/src/modal/modal',
         'angular-bootstrap-ui-accordion': '../bower_components/angular-ui-bootstrap/src/accordion/accordion',
         'angular-bootstrap-ui-alert': '../bower_components/angular-ui-bootstrap/src/alert/alert',
@@ -31,7 +30,6 @@ require.config({
         'angular-bootstrap-ui-tooltip': '../bower_components/angular-ui-bootstrap/src/tooltip/tooltip',
         'angular-bootstrap-ui-transition': '../bower_components/angular-ui-bootstrap/src/transition/transition',
         'angular-bootstrap-ui-typeahead': '../bower_components/angular-ui-bootstrap/src/typeahead/typeahead',
-
         angular: '../bower_components/angular/angular',
         affix: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/affix',
         alert: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/alert',
@@ -44,12 +42,15 @@ require.config({
         scrollspy: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/scrollspy',
         modal: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/modal',
         tooltip: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/tooltip',
-        popover: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/popover'
+        popover: '../bower_components/twbs-bootstrap-sass/vendor/assets/javascripts/bootstrap/popover',
+        almond: '../bower_components/almond/almond'
     },
     shim: {
         angular: {
             exports: 'angular',
-            deps: ['lodash']
+            deps: [
+                'lodash'
+            ]
         },
         'angular-route': [
             'angular'
@@ -69,25 +70,106 @@ require.config({
             ],
             exports: 'angular.mock'
         },
-        'angular-bootstrap-ui-modal': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-accordion': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-alert': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-buttons': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-carousel': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-collapse': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-dateparser': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-datepicker': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-dropdown': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-pagination': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-popover': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-position': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-progressbar': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-rating': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-tabs': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-timepicker': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-tooltip': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-transition': { deps: [ 'angular' ]},
-        'angular-bootstrap-ui-typeahead': { deps: [ 'angular' ]}
+        'angular-ui-router': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-modal': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-accordion': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-alert': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-buttons': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-carousel': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-collapse': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-dateparser': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-datepicker': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-dropdown': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-pagination': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-popover': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-position': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-progressbar': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-rating': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-tabs': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-timepicker': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-tooltip': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-transition': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-typeahead': {
+            deps: [
+                'angular'
+            ]
+        }
     },
     priority: [
         'angular'
@@ -100,11 +182,11 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 require([
     'angular',
     'app',
-    'angular-route',
     'angular-cookies',
     'angular-sanitize',
-    'angular-resource'
-], function (angular, app, ngRoutes, ngCookies, ngSanitize, ngResource) {
+    'angular-resource',
+    'angular-ui-router'
+], function (angular, app, ngCookies, ngSanitize, ngResource, uiRouter) {
     'use strict';
     /* jshint ignore:start */
     var $html = angular.element(document.getElementsByTagName('html')[0]);

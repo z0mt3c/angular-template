@@ -18,12 +18,11 @@ define(['angular',
         'ngCookies',
         'ngResource',
         'ngSanitize',
-        'ngRoute'
+        'ui.router'
     ]);
 
-    angular.module('app').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-        //$locationProvider.html5Mode(true);
-        $routeProvider.otherwise({redirectTo: '/start'});
+    angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/start');
     }]);
 
     return angular.module('app');

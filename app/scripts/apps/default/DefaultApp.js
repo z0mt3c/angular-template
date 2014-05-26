@@ -5,26 +5,28 @@ define(['angular', 'angular-bootstrap-ui-transition', 'angular-bootstrap-ui-moda
         'ui.bootstrap.modal',
         'DefaultServices',
         /*angJSDeps*/
-        'ngCookies',
-        'ngResource',
-        'ngSanitize',
-        'ngRoute'])
-        .config(function ($routeProvider) {
-            $routeProvider
-                .when('/start', {
+        //'ngCookies',
+        //'ngResource',
+        //'ngSanitize',
+        'ui.router'])
+        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+            $stateProvider
+                .state('start', {
+                    url: '/start',
                     templateUrl: 'scripts/apps/default/templates/start.tpl.html',
                     controller: 'DefaultStartCtrl'
                 })
-                .when('/hello/:name', {
+                .state('hello', {
+                    url: '/hello/:name',
                     templateUrl: 'scripts/apps/default/templates/hello.tpl.html',
                     controller: 'DefaultHelloCtrl',
                     resolve: {
-                        hello: ['$route', 'Hello', function ($route, Hello) {
-                            return Hello.get({name: $route.current.params.name});
+                        hello: ['Hello', '$stateParams', function (Hello, $stateParams) {
+                            return Hello.get({name: $stateParams.name});
                         }]
                     }
-                })
-        })
+                });
+        }])
         .controller('DefaultStartCtrl', function ($scope, $modal) {
             $scope.items = ['item1', 'item2', 'item3'];
 
