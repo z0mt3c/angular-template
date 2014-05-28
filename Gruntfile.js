@@ -326,6 +326,15 @@ module.exports = function (grunt) {
             server: [
                 'compass:server'
             ],
+            development: {
+                tasks: [
+                    'watch',
+                    'nodemon:development'
+                ],
+                options: {
+                    logConcurrentOutput: true
+                }
+            },
             test: [
                 'compass'
             ],
@@ -418,6 +427,14 @@ module.exports = function (grunt) {
             }
         },
 
+        processhtml: {
+            dist: {
+                files: {
+                    'dist/index.html': ['dist/index.html']
+                }
+            }
+        },
+
         nodemon: {
             development: {
                 script: 'standalone-server/server.js',
@@ -429,6 +446,26 @@ module.exports = function (grunt) {
                     },
                     env: {
                         NODE_ENV: 'development',
+                        PORT: 8000
+                    },
+                    cwd: __dirname,
+                    watch: ['plugin', 'standalone-server'],
+                    ignore: ['node_modules/**'],
+                    ext: 'js',
+                    delay: 1000,
+                    legacyWatch: true
+                }
+            },
+            production: {
+                script: 'standalone-server/server.js',
+                options: {
+                    callback: function (nodemon) {
+                        nodemon.on('log', function (event) {
+                            console.log(event.colour);
+                        });
+                    },
+                    env: {
+                        NODE_ENV: 'production',
                         PORT: 8000
                     },
                     cwd: __dirname,
@@ -452,8 +489,7 @@ module.exports = function (grunt) {
             'clean:server',
             'concurrent:server',
             'autoprefixer',
-            'nodemon:development',
-            'watch'
+            'concurrent:development'
         ]);
     });
 
@@ -482,15 +518,14 @@ module.exports = function (grunt) {
         'copy:dist',
         'cdnify',
         'cssmin',
-        // Below task commented out as r.js (via grunt-contrib-requirejs) will take care of this
-        // 'uglify',
         'rev',
         'usemin',
+        'processhtml',
         'requirejs:dist',
         'htmlmin'
     ]);
 
-    grunt.registerTask('prod', [ 'build', 'express:prod', 'watch:nothing' ]);
+    grunt.registerTask('prod', [ 'build', 'nodemon:production' ]);
 
     grunt.registerTask('do', [
         'newer:jshint',
