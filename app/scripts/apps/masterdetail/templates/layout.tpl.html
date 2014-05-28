@@ -1,12 +1,12 @@
-<div class="md-layout">
-    <div class="md-side-region">
+<div class="row">
+    <div class="col-md-3">
         <h1>Manufacturer</h1>
 
-        <div class="md-side-list">
-            <a class="md-list-item" ng-repeat="menuItem in items" ui-sref="masterdetail.detail({id:menuItem.id})"
+        <div class="list-group">
+            <a class="list-group-item" ng-repeat="menuItem in items" ui-sref="masterdetail.detail({id:menuItem.id})"
                ng-class="{active: (menuItem.id == item.id)}" ui-sref-active="active">{{menuItem.title}} <span
                     class="badge">{{menuItem.count}}</span></a>
         </div>
     </div>
-    <div class="md-main-region" ui-view="detail">b</div>
+    <div class="col-md-9" ui-view="detail">b</div>
 </div>
