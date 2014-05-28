@@ -418,29 +418,25 @@ module.exports = function (grunt) {
             }
         },
 
-
-        // express app
-        express: {
-            options: {
-                // Override defaults here
-                port: '9000'
-            },
-            dev: {
+        nodemon: {
+            development: {
+                script: 'standalone-server/server.js',
                 options: {
-                    'node_env': 'development',
-                    script: 'server/app.js'
-                }
-            },
-            prod: {
-                options: {
-                    'node_env': 'production',
-                    script: 'server/app.js'
-                }
-            },
-            test: {
-                options: {
-                    'node_env': 'test',
-                    script: 'server/app.js'
+                    callback: function (nodemon) {
+                        nodemon.on('log', function (event) {
+                            console.log(event.colour);
+                        });
+                    },
+                    env: {
+                        NODE_ENV: 'development',
+                        PORT: 8000
+                    },
+                    cwd: __dirname,
+                    watch: ['plugin', 'standalone-server'],
+                    ignore: ['node_modules/**'],
+                    ext: 'js',
+                    delay: 1000,
+                    legacyWatch: true
                 }
             }
         }
@@ -456,9 +452,7 @@ module.exports = function (grunt) {
             'clean:server',
             'concurrent:server',
             'autoprefixer',
-            //'connect:livereload',
-            'connect:test',
-            'express:dev',
+            'nodemon:development',
             'watch'
         ]);
     });
