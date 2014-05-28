@@ -1,14 +1,10 @@
-define(['angular', 'entities/masterdetail'], function (angular) {
+define(['angular', 'entities/masterdetail', 'angular-ui-router'], function (angular) {
     'use strict';
 
     angular.module('MasterDetailApp', [
         'MasterDetailServices',
-        /*angJSDeps*/
-        //'ngCookies',
-        //'ngResource',
-        //'ngSanitize',
         'ui.router'])
-        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider) {
             $stateProvider
                 .state({
                     name: 'masterdetail',

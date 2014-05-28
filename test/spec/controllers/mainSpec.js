@@ -5,7 +5,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
   describe('Controller: MainCtrl', function () {
 
     // load the controller's module
-    beforeEach(module('bestballApp.controllers.MainCtrl'));
+    beforeEach(module('DemoApp'));
 
     var MainCtrl,
       scope;
@@ -13,7 +13,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
-      MainCtrl = $controller('MainCtrl', {
+      MainCtrl = $controller('DemoAppCtrl', {
         $scope: scope
       });
     }));

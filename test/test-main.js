@@ -1,11 +1,11 @@
 var tests = [];
 for (var file in window.__karma__.files) {
-  if (window.__karma__.files.hasOwnProperty(file)) {
-    // Removed "Spec" naming from files
-    if (/Spec\.js$/.test(file)) {
-      tests.push(file);
+    if (window.__karma__.files.hasOwnProperty(file)) {
+        // Removed "Spec" naming from files
+        if (/Spec\.js$/.test(file)) {
+            tests.push(file);
+        }
     }
-  }
 }
 
 requirejs.config({
@@ -59,14 +59,114 @@ requirejs.config({
     },
 
     shim: {
-        'angular' : {'exports' : 'angular'},
+        'angular': {'exports': 'angular'},
         'angular-route': ['angular'],
         'angular-cookies': ['angular'],
         'angular-sanitize': ['angular'],
         'angular-resource': ['angular'],
         'angular-mocks': {
-          deps:['angular'],
-          'exports':'angular.mock'
+            deps: ['angular'],
+            'exports': 'angular.mock'
+        },
+        'angular-ui-router': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-modal': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-accordion': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-alert': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-buttons': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-carousel': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-collapse': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-dateparser': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-datepicker': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-dropdown': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-pagination': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-popover': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-position': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-progressbar': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-rating': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-tabs': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-timepicker': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-tooltip': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-transition': {
+            deps: [
+                'angular'
+            ]
+        },
+        'angular-bootstrap-ui-typeahead': {
+            deps: [
+                'angular'
+            ]
         }
     },
 

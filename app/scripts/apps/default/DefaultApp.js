@@ -1,15 +1,11 @@
-define(['angular', 'angular-bootstrap-ui-transition', 'angular-bootstrap-ui-modal', 'entities/default'], function (angular) {
+define(['angular', 'angular-ui-router', 'angular-bootstrap-ui-transition', 'angular-bootstrap-ui-modal', 'entities/default'], function (angular) {
     'use strict';
 
     angular.module('DefaultApp', [
         'ui.bootstrap.modal',
         'DefaultServices',
-        /*angJSDeps*/
-        //'ngCookies',
-        //'ngResource',
-        //'ngSanitize',
         'ui.router'])
-        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider) {
             $stateProvider
                 .state('start', {
                     url: '/start',

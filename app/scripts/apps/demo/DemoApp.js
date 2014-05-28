@@ -1,13 +1,8 @@
-define(['angular'], function (angular) {
+define(['angular', 'angular-ui-router', 'apps/notification/NotificationApp'], function (angular) {
     'use strict';
 
-    angular.module('DemoApp', [
-        /*angJSDeps*/
-        //'ngCookies',
-        //'ngResource',
-        //'ngSanitize',
-        'ui.router'])
-        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    angular.module('DemoApp', ['ui.router', 'NotificationApp'])
+        .config(['$stateProvider', function ($stateProvider) {
             $stateProvider
                 .state('demo', {
                     url: '/demo',

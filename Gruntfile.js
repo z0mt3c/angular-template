@@ -418,34 +418,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // r.js compile config
-        /*
-        requirejs: {
-            dist: {
-                options: {
-                    dir: '<%= yeoman.dist %>/scripts/',
-                    name: 'main',
-                    include: ['main'],
-                    preserveLicenseComments: false, // remove all comments
-                    removeCombined: true,
-                    baseUrl: '<%= yeoman.app %>/scripts',
-                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
-                    optimize: 'uglify2',
-                    wrap: true,
-                    uglify2: {
-                        mangle: false
-                    },
-                    replaceRequireScript: [
-                        {
-                            files: ['<%= yeoman.dist %>/index.html'],
-                            module: 'main',
-                            modulePath: '/scripts/main'
-                        }
-                    ]
-                }
-            }
-        },*/
-
 
         // express app
         express: {

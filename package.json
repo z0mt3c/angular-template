@@ -1,5 +1,5 @@
 {
-  "name": "bestball",
+  "name": "angular-template",
   "version": "0.0.0",
   "dependencies": {
     "express": "~4.1.x",
