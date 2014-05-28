@@ -2,8 +2,7 @@
 define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
   'use strict';
 
-  describe('Controller: MainCtrl', function () {
-
+  describe('Controller: DemoAppCtrl', function () {
     // load the controller's module
     beforeEach(module('DemoApp'));
 
