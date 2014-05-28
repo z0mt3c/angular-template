@@ -498,9 +498,13 @@ module.exports = function (grunt) {
 
     grunt.registerTask('prod', [ 'build', 'express:prod', 'watch:nothing' ]);
 
-    grunt.registerTask('default', [
+    grunt.registerTask('do', [
         'newer:jshint',
         'test',
         'build'
+    ]);
+
+    grunt.registerTask('default', [
+        'serve'
     ]);
 };
