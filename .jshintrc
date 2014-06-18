@@ -20,15 +20,6 @@
     "trailing": true,
     "smarttabs": true,
     "globals": {
-        "angular": false,
-        /* AMD */
-        "define": false,
-        /* Custom */
-        "ngRoutes": false,
-        "ngSanitize": false,
-        "ngCookies": false,
-        "ngResource": false,
-        "$log": false
     }
 }
 

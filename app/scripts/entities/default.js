@@ -1,10 +1,9 @@
-define(['angular'], function (angular) {
-    'use strict';
-    var defaultServices = angular.module('DefaultServices', ['ngResource']);
+var angular = require('angular');
 
-    defaultServices.factory('Hello', ['$resource', function ($resource) {
-        return $resource('/api/hello/:name', {}, {
-            get: { method: 'GET', params: {name: '@name'}}
-        });
-    }]);
-});
+var defaultServices = module.exports = angular.module('DefaultServices', [require('angular-resource').name]);
+
+defaultServices.factory('Hello', ['$resource', function ($resource) {
+    return $resource('/api/hello/:name', {}, {
+        get: { method: 'GET', params: {name: '@name'}}
+    });
+}]);

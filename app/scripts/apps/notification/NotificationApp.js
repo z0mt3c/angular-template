@@ -1,89 +1,88 @@
-define(['angular'], function (angular) {
-    'use strict';
+var angular = require('angular');
+var _ = require('lodash');
 
-    return angular.module('NotificationApp', [])
-        .provider('Notifications', [function () {
-            var options = {
-                ttl: 3000,
-                type: 'info'
+module.exports = angular.module('NotificationApp', [])
+    .provider('Notifications', [function () {
+        var options = {
+            ttl: 3000,
+            type: 'info'
+        };
+
+        this.setOptions = function (newOptions) {
+            angular.extend(options, newOptions);
+        };
+
+        this.ttl = function (ttl) {
+            if (angular.isDefined(ttl)) {
+                options.ttl = ttl;
+                return this;
+            }
+            return options.ttl;
+        };
+
+        this.type = function (type) {
+            if (angular.isDefined(type)) {
+                options.type = type;
+                return this;
+            }
+            return options.type;
+        };
+
+        this.$get = function ($timeout, $rootScope) {
+            function Notifications() {
+                this._notifications = [];
+                this.options = options;
+
+                Object.defineProperty(this, 'notifications', {
+                    get: function () {
+                        return this._notifications;
+                    }
+                });
+
+            }
+
+            Notifications.prototype._broadcastUpdate = function () {
+                $rootScope.$broadcast('notifications::update', this.notifications);
             };
 
-            this.setOptions = function (newOptions) {
-                angular.extend(options, newOptions);
-            };
+            Notifications.prototype.add = function (title, type, description, ttl) {
+                var notification, self = this;
 
-            this.ttl = function (ttl) {
-                if (angular.isDefined(ttl)) {
-                    options.ttl = ttl;
-                    return this;
-                }
-                return options.ttl;
-            };
-
-            this.type = function (type) {
-                if (angular.isDefined(type)) {
-                    options.type = type;
-                    return this;
-                }
-                return options.type;
-            };
-
-            this.$get = function ($timeout, $rootScope) {
-                function Notifications() {
-                    this._notifications = [];
-                    this.options = options;
-
-                    Object.defineProperty(this, 'notifications', {
-                        get: function () {
-                            return this._notifications;
-                        }
-                    });
-
-                }
-
-                Notifications.prototype._broadcastUpdate = function () {
-                    $rootScope.$broadcast('notifications::update', this.notifications);
+                notification = {
+                    title: (title ? title.toString() : ''),
+                    description: (description ? description.toString() : ''),
+                    type: (type ? type.toString() : options.type),
+                    ttl: (ttl ? parseInt(ttl, 10) : options.ttl)
                 };
 
-                Notifications.prototype.add = function (title, type, description, ttl) {
-                    var notification, self = this;
+                this._notifications.push(notification);
 
-                    notification = {
-                        title: (title ? title.toString() : ''),
-                        description: (description ? description.toString() : ''),
-                        type: (type ? type.toString() : options.type),
-                        ttl: (ttl ? parseInt(ttl, 10) : options.ttl)
-                    };
+                $timeout(function () {
+                    self.remove(notification);
+                }, notification.ttl);
 
-                    this._notifications.push(notification);
+                // Broadcast change
+                this._broadcastUpdate();
 
-                    $timeout(function () {
-                        self.remove(notification);
-                    }, notification.ttl);
+                return true;
+            };
+
+            Notifications.prototype.remove = function (notification) {
+                if (this._notifications.indexOf(notification) !== -1) {
+                    _.remove(this._notifications, notification);
 
                     // Broadcast change
                     this._broadcastUpdate();
+                }
 
-                    return true;
-                };
-
-                Notifications.prototype.remove = function (notification) {
-                    if (this._notifications.indexOf(notification) !== -1) {
-                        _.remove(this._notifications, notification);
-
-                        // Broadcast change
-                        this._broadcastUpdate();
-                    }
-
-                    return this;
-                };
-
-                return new Notifications();
+                return this;
             };
 
-            this.$get.$inject = ['$timeout', '$rootScope'];
-        }])
-        .controller('NotificationsCtrl', ['$scope', 'Notifications', function ($scope, Notifications) {
-            $scope.notifications = Notifications.notifications;
-        }]);
-});
+            return new Notifications();
+        };
+
+        this.$get.$inject = ['$timeout', '$rootScope'];
+    }])
+    .controller('NotificationsCtrl', ['$scope', 'Notifications', function ($scope, Notifications) {
+        $scope.notifications = Notifications.notifications;
+    }]);

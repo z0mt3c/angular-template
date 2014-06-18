@@ -1,29 +1,30 @@
-/*jshint unused: vars */
-define(['angular',
-    'apps/header/HeaderApp',
-    'apps/notification/NotificationApp',
-    'apps/default/DefaultApp',
-    'apps/demo/DemoApp',
-    'apps/masterdetail/MasterDetailApp'
-]/*deps*/, function (angular)/*invoke*/ {
-    'use strict';
+var angular = require('angular');
+//require('HeaderApp');
 
-    angular.module('app', [
-        'NotificationApp',
-        'HeaderApp',
-        'DefaultApp',
-        'MasterDetailApp',
-        'DemoApp',
-        /*angJSDeps*/
-        'ngCookies',
-        'ngResource',
-        'ngSanitize',
-        'ui.router'
-    ]);
+/*
+ 'apps/header/HeaderApp',
+ 'apps/notification/NotificationApp',
+ 'apps/default/DefaultApp',
+ 'apps/demo/DemoApp',
+ 'apps/masterdetail/MasterDetailApp'
+ */
 
-    angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/start');
-    }]);
+require('angular-ui-router');
 
-    return angular.module('app');
-});
+module.exports = angular.module('app', [
+    require('./apps/header/HeaderApp').name,
+    require('./apps/notification/NotificationApp').name,
+    //require('./apps/default/DefaultApp').name,
+    require('./apps/demo/DemoApp').name,
+    require('./apps/masterdetail/MasterDetailApp').name,
+    /*
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    */
+]);
+
+
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/start');
+}]);

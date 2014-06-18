@@ -1,25 +1,14 @@
 {
-  "name": "angular-template",
-  "version": "0.0.0",
-  "dependencies": {
-    "angular": "1.2.11",
+    "name": "angular-template",
+    "version": "1.0.0",
+    "dependencies": {
     "json3": "~3.2.6",
-    "requirejs": "~2.1.10",
     "es5-shim": "~2.1.0",
-    "jquery": "~1.11.0",
-    "angular-resource": "1.2.11",
-    "angular-cookies": "1.2.11",
-    "angular-sanitize": "1.2.11",
-    "angular-route": "1.2.11",
-    "twbs-bootstrap-sass": "~3.1.1+2",
-    "font-awesome": "~4.1.0",
-    "angular-ui-bootstrap": "~0.11.0",
-    "lodash": "~2.4.1",
-    "angular-ui-router": "~0.2.10",
-    "almond": "~0.2.9"
-  },
-  "devDependencies": {
-    "angular-mocks": "1.2.11",
-    "angular-scenario": "1.2.11"
-  }
+        "angular": "1.2.18",
+        "angular-resource": "1.2.18",
+        "angular-ui-bootstrap": "~0.11.0",
+        "font-awesome": "~4.1.0",
+        "bootstrap": "*"
+    },
+    "devDependencies": {}
 }
