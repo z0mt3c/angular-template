@@ -1,5 +1,7 @@
 var angular = require('angular');
-var masterDetailServices = module.exports = angular.module('MasterDetailServices', [require('angular-resource').name]);
+require('angular-resource');
+
+var masterDetailServices = module.exports = angular.module('MasterDetailServices', [ 'ngResource' ]);
 
 masterDetailServices.factory('MasterDetail', ['$resource', function ($resource) {
     return $resource('/api/masterdetail/:id', {}, {

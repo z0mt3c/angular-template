@@ -1,8 +1,9 @@
 var angular = require('angular');
 require('angular-ui-router');
+require('angular-bootstrap-ui-modal');
 
 module.exports = angular.module('DefaultApp', [
-    require('angular-bootstrap-ui-modal').name,
+    'ui.bootstrap.modal',
     require('../../entities/default').name,
     'ui.router'])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider) {

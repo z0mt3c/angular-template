@@ -6,13 +6,17 @@ module.exports = {
         }
     },
     'angular-route': {
-        depends: { angular: 'angular'}},
+        depends: { angular: 'angular'}
+    },
     'angular-cookies': {
-        depends: { angular: 'angular'}},
+        depends: { angular: 'angular'}
+    },
     'angular-sanitize': {
-        depends: { angular: 'angular'}},
+        depends: { angular: 'angular'}
+    },
     'angular-resource': {
-        depends: { angular: 'angular'}},
+        depends: { angular: 'angular'}
+    },
     'angular-mocks': {
         exports: 'angular.mock',
         depends: {
@@ -22,7 +26,7 @@ module.exports = {
     'angular-bootstrap-ui-modal': {
         depends: {
             'angular': 'angular',
-            'angular-bootstrap-ui-transition': 'angular-bootstrap-ui-transition'
+            'angular-bootstrap-ui-transition': 'ngUITransition'
         }
     },
     'angular-bootstrap-ui-accordion': {
@@ -115,5 +119,4 @@ module.exports = {
             'angular': 'angular'
         }
     }
-}
-;
+};

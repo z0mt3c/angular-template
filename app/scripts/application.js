@@ -14,7 +14,7 @@ require('angular-ui-router');
 module.exports = angular.module('app', [
     require('./apps/header/HeaderApp').name,
     require('./apps/notification/NotificationApp').name,
-    //require('./apps/default/DefaultApp').name,
+    require('./apps/default/DefaultApp').name,
     require('./apps/demo/DemoApp').name,
     require('./apps/masterdetail/MasterDetailApp').name,
     /*

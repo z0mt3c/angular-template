@@ -1,7 +1,7 @@
 var angular = require('angular');
 require('angular-ui-router');
 
-angular.module('MasterDetailApp', [
+module.exports = angular.module('MasterDetailApp', [
     require('../../entities/masterdetail').name,
     'ui.router'])
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider) {

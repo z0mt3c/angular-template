@@ -134,7 +134,7 @@ gulp.task('uglify', ['browserify', 'copy'], function () {
         .pipe(gulp.dest(paths.dist + '/scripts'));
 });
 
-gulp.task('livereload', function () {
+gulp.task('livereload', ['watch'], function () {
     var server = livereload();
 
     var changed = function (file) {
@@ -148,7 +148,7 @@ gulp.task('setWatch', function () {
     global.isWatching = true;
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', ['copy'], function () {
     global.isWatching = true;
     gulp.watch(paths.app + '/styles/**/*.less', ['less']);
     gulp.watch(paths.app + '/images/**/*', ['imagemin']);
